@@ -1,7 +1,13 @@
 {
     "compilerOptions": {
       "baseUrl": "src",
-      "target": "es6"
+      "target": "es6",
+      "paths": {
+        "components": ["components"],
+        "configurations": ["configurations"],
+        "globals": ["globals"],
+        "helpers": ["helpers"]
+      }
     },
     "include": ["src"],
     "exclude": ["node_modules"]

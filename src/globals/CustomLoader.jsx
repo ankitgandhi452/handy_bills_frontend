@@ -2,9 +2,9 @@ import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
+import { stateSetter } from 'helpers/global';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { stateSetter } from '../helpers/global';
 
 
 export default class CustomLoader extends Component {

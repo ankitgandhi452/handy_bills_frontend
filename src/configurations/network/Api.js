@@ -1,5 +1,5 @@
 import axios from "axios";
-import { storeAuthDataDispatch } from 'components/Authentication/Authentication.action';
+import { storeAuth } from 'components/Authentication/Authentication.action';
 import { config } from "configurations/network/default";
 import { url } from "configurations/network/url";
 import { store } from "configurations/redux/store";
@@ -63,7 +63,7 @@ class Api {
             }
             this.authData = authData;
             store.dispatch(
-                storeAuthDataDispatch(this.authData)
+                storeAuth(this.authData)
             )
         }
     }
