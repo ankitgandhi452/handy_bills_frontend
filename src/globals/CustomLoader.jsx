@@ -55,7 +55,7 @@ export default class CustomLoader extends Component {
                     justifyContent="center"
                     alignItems="center"
                     flexDirection="column"
-                    style={{opacity: 0.9}}
+                    style={{opacity: 0.7}}
                 >
                     <Box display="flex">
                         <CircularProgress color="secondary" />
