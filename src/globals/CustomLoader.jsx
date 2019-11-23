@@ -47,7 +47,7 @@ export default class CustomLoader extends Component {
                 <Box
                     height="100%"
                     width="100%"
-                    bgcolor="primary.dark"
+                    bgcolor="common.white"
                     position="absolute"
                     top="0"
                     left="0"
@@ -55,14 +55,14 @@ export default class CustomLoader extends Component {
                     justifyContent="center"
                     alignItems="center"
                     flexDirection="column"
-                    style={{opacity: 0.7}}
+                    style={{ opacity: 0.7 }}
                 >
                     <Box display="flex">
-                        <CircularProgress color="secondary" />
+                        <CircularProgress color="primary" />
                     </Box>
                     <Box display="flex" p="1rem" >
                         <Box p="1rem" >
-                            <Typography variant="h4" color="textSecondary">
+                            <Typography variant="h4" color="primary">
                                 {loadingText}
                             </Typography>
                         </Box>
