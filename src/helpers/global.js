@@ -22,7 +22,7 @@ export const formatErrorCaseForForms = (errors) => {
 }
 
 export const setFormikErrors = (errors, formikScope) => {
-    for (let key in errors) {
+    for (var key in errors) {
         if (key !== "fullMessages") {
             formikScope.setFieldError(key, errors[key]);
         }
