@@ -7,10 +7,12 @@ import { theme } from 'configurations/materialUI/theme';
 import { persistor, store } from 'configurations/redux/store';
 import CustomContainer from 'globals/CustomContainer';
 import CustomLoader from 'globals/CustomLoader';
+import SnackbarContainer from 'globals/SnackbarContainer';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
+
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <ThemeProvider theme={theme}>
             <CustomContainer maxWidth="md">
               <Box height="100vh">
-                <AuthenticationContainer />
+                <SnackbarContainer>
+                  <AuthenticationContainer />
+                </SnackbarContainer>
               </Box>
             </CustomContainer>
           </ThemeProvider>
