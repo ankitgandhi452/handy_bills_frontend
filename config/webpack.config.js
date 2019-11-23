@@ -26,6 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const eslint = require('eslint');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -366,6 +367,7 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  'lodash',
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -634,6 +636,7 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
+        new LodashModuleReplacementPlugin,
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
