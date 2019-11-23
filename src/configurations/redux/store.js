@@ -1,6 +1,7 @@
 import { createOffline } from '@redux-offline/redux-offline';
 import config from '@redux-offline/redux-offline/lib/config';
 import Api from 'configurations/network/Api';
+import { url } from 'configurations/network/url';
 import { combinedReducer } from "configurations/redux/reducers";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -42,7 +43,7 @@ const persistedReducer = persistReducer(persistConfig, offlineEnhanceReducer(com
 
 console.log(ApiInstance)
 const middlewares = [
-    thunk.withExtraArgument(ApiInstance),
+    thunk.withExtraArgument({ApiInstance, urls: url}),
     offlineMiddleware
 ]
 

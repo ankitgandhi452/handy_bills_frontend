@@ -80,7 +80,7 @@ export default class SignupForm extends Component {
                 spacing={1}
             >
                 <Grid item xs={12} md={8}>
-                    <Box p={2} pt={5} pb={5} borderRadius="borderRadius" boxShadow={3} bgcolor="rgba(0,0,0,0.3)" color="primary.main">
+                    <Box p={2} pt={5} pb={5} borderRadius="borderRadius" boxShadow={3} bgcolor="background.default">
                         <Formik
                             initialValues={this.signupInitialState}
                             onSubmit={this.props.signupSubmit}
@@ -218,7 +218,7 @@ export default class SignupForm extends Component {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                    <Box p={2} borderRadius="borderRadius" boxShadow={3} bgcolor="rgba(0,0,0,0.3)" color="primary.main">
+                    <Box p={2} borderRadius="borderRadius" bgcolor="background.default" boxShadow={3} color="primary.main">
                         <CustomSecondaryButton>
                             Login
                         </CustomSecondaryButton>

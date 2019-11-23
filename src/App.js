@@ -20,7 +20,7 @@ function App() {
           <CssBaseline />
           <ThemeProvider theme={theme}>
             <CustomContainer maxWidth="md">
-              <Box height="100vh" width="100%" bgcolor="grey.800" boxShadow={3}>
+              <Box height="100vh">
                 <AuthenticationContainer />
               </Box>
             </CustomContainer>
