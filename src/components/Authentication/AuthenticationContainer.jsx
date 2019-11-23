@@ -13,6 +13,11 @@ class AuthenticationContainer extends Component {
             register: PropTypes.func.isRequired
         }),
         authentication: PropTypes.object.isRequired,
+        user: PropTypes.shape({
+            loading: PropTypes.bool.isRequired,
+            data: PropTypes.object.isRequired,
+            errors: PropTypes.object.isRequired
+        }),
         enqueueSnackbar: PropTypes.func.isRequired,
         closeSnackbar: PropTypes.func.isRequired,
     }
@@ -35,6 +40,7 @@ class AuthenticationContainer extends Component {
         return (
             <AuthenticationWrapper
                 signupSubmit={this.signupSubmit}
+                user={this.props.user}
             />
         )
     }
@@ -42,7 +48,8 @@ class AuthenticationContainer extends Component {
 
 const mapStateToProps = (state) => (
     {
-        authentication: state.authentication
+        authentication: state.authentication,
+        user: state.user
     }
 )
 
