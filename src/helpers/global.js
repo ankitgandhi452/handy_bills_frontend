@@ -1,3 +1,4 @@
+import { store } from 'configurations/redux/store';
 import camelCase from 'lodash/camelCase';
 import mapKeys from 'lodash/mapKeys';
 
@@ -29,3 +30,7 @@ export const setFormikErrors = (errors, formikScope) => {
     }
     formikScope.setSubmitting(false);
 }
+
+export const isAuthenticated = () => (
+    store.getState().authentication.isAuthenticated
+)

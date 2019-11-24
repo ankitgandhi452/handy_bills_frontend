@@ -2,9 +2,9 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NoSsr from '@material-ui/core/NoSsr';
 import { ThemeProvider } from '@material-ui/styles';
-import AuthenticationContainer from 'components/Authentication/AuthenticationContainer';
 import { theme } from 'configurations/materialUI/theme';
 import { persistor, store } from 'configurations/redux/store';
+import ApplicationRouter from 'configurations/routing/ApplicationRouter';
 import CustomContainer from 'globals/CustomContainer';
 import CustomLoader from 'globals/CustomLoader';
 import SnackbarContainer from 'globals/SnackbarContainer';
@@ -24,7 +24,7 @@ function App() {
             <CustomContainer maxWidth="md">
               <Box height="100vh">
                 <SnackbarContainer>
-                  <AuthenticationContainer />
+                  <ApplicationRouter />
                 </SnackbarContainer>
               </Box>
             </CustomContainer>

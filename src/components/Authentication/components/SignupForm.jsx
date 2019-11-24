@@ -85,7 +85,7 @@ export default class SignupForm extends Component {
                             initialValues={this.signupInitialState}
                             onSubmit={this.props.signupSubmit}
                             validationSchema={this.signupSchema}
-                            render={({values}) => (
+                            render={({values, isSubmitting}) => (
                                 <Form>
                                     <Grid
                                         container
@@ -194,6 +194,7 @@ export default class SignupForm extends Component {
                                         <Grid item xs={12} md={8}>
                                             <CustomPrimaryButton
                                                 type="submit"
+                                                disabled={isSubmitting}
                                             >
                                                 Submit
                                             </CustomPrimaryButton>
