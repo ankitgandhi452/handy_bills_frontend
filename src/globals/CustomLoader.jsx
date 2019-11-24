@@ -19,11 +19,13 @@ export default class CustomLoader extends Component {
     
     static propTypes = {
         loading: PropTypes.bool.isRequired,
-        loadingText: PropTypes.string
+        loadingText: PropTypes.string,
+        withTransition: PropTypes.bool
     }
 
     static defaultProps = {
-        loadingText: "Loading..."
+        loadingText: "Loading...",
+        withTransition: true
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -38,37 +40,45 @@ export default class CustomLoader extends Component {
         this.setter.cancel()
     }
 
+    renderLoadinBox = (loadingText) => (
+        <Box
+            height="100%"
+            width="100%"
+            bgcolor="common.white"
+            position="absolute"
+            top="0"
+            left="0"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            style={{ opacity: 0.7 }}
+        >
+            <Box display="flex">
+                <CircularProgress color="primary" />
+            </Box>
+            <Box display="flex" p="1rem" >
+                <Box p="1rem" >
+                    <Typography variant="h4" color="primary">
+                        {loadingText}
+                    </Typography>
+                </Box>
+            </Box>
+        </Box>
+    )
+
+    renderLoadingBoxWithTransition = (showLoading, loadingText) => (
+        <Slide direction="up" in={showLoading} mountOnEnter unmountOnExit>
+            {this.renderLoadinBox(loadingText)}
+        </Slide>
+    )
+
     render() {
         const { showLoading } = this.state;
-        const { loadingText } = this.props;
+        const { loadingText, withTransition } = this.props;
 
         return (
-            <Slide direction="up" in={showLoading} mountOnEnter unmountOnExit>
-                <Box
-                    height="100%"
-                    width="100%"
-                    bgcolor="common.white"
-                    position="absolute"
-                    top="0"
-                    left="0"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    flexDirection="column"
-                    style={{ opacity: 0.7 }}
-                >
-                    <Box display="flex">
-                        <CircularProgress color="primary" />
-                    </Box>
-                    <Box display="flex" p="1rem" >
-                        <Box p="1rem" >
-                            <Typography variant="h4" color="primary">
-                                {loadingText}
-                            </Typography>
-                        </Box>
-                    </Box>
-                </Box>
-            </Slide>
+            withTransition ? this.renderLoadingBoxWithTransition(showLoading, loadingText) : this.renderLoadinBox(loadingText)
         )
     }
 }
