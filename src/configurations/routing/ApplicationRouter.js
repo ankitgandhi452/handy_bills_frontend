@@ -8,7 +8,9 @@ const AuthenticationContainer = React.lazy(() => import("components/Authenticati
 
 const ApplicationRouter = () => (
     (
-        <Router>
+        <Router
+            hashType='noslash'
+        >
             <Suspense fallback={<CustomLoader loading={true} withTransition={false} />}>
                 <Switch>
                     
