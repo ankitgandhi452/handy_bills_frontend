@@ -15,6 +15,9 @@ const ApplicationRouter = () => (
                     <Route path="/login">
                         <AuthenticationContainer />
                     </Route>
+                    <Route path="/register">
+                        <AuthenticationContainer />
+                    </Route>
                     <AuthenticatedRoute path="/">
                         <AuthenticationContainer />
                     </AuthenticatedRoute>
@@ -28,8 +31,10 @@ const AuthenticatedRoute = ({children, ...rest}) => (
     <Route
         {...rest}
         render={
-            ({ location }) => (
-                isAuthenticated() ?
+            ({ location }) => 
+            {
+                console.log(location)
+                return isAuthenticated() ?
                     (
                         children
                     )
@@ -41,8 +46,8 @@ const AuthenticatedRoute = ({children, ...rest}) => (
                                 state: { from: location }
                             }}
                         />
-                    )
-            )
+                    )}
+            
         }
     />
 )

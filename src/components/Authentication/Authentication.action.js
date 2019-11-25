@@ -1,4 +1,4 @@
-import { REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
+import { LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
 import { getNetworkError, getRequestDataInFormat } from 'helpers/network';
 
 export const storeAuth = (payload) => (
@@ -46,6 +46,27 @@ const registerFailure = (payload) => (
     }
 )
 
+const loginInitiate = (payload) => (
+    {
+        type: LOGIN_INITIATE,
+        payload
+    }
+)
+
+const loginSuccess = (payload) => (
+    {
+        type: LOGIN_SUCCESS,
+        payload
+    }
+)
+
+const loginFailure = (payload) => (
+    {
+        type: LOGIN_FAILURE,
+        payload
+    }
+)
+
 export const register = (userData) => {
     return (dispatch, getState, { ApiInstance, urls }) => {
         return new Promise((resolve, reject) => {
@@ -69,6 +90,38 @@ export const register = (userData) => {
                         let simplifiedError = getNetworkError(error);
                         console.log("error", simplifiedError);
                         dispatch(registerFailure(simplifiedError));
+                        reject(simplifiedError);
+                    })
+            } else {
+                resolve({msg: "Already Authenticated"})
+            }
+        })
+    }
+}
+
+export const login = (userData) => {
+    return (dispatch, getState, { ApiInstance, urls }) => {
+        return new Promise((resolve, reject) => {
+            dispatch(loginInitiate())
+            const authDetails = getState().authentication;
+            if (!authDetails.isAuthenticated) {
+                let requestOptions = {
+                    method: "POST",
+                    url: urls.api.authentication.login,
+                    data: getRequestDataInFormat(userData)
+                }
+                console.log("requestOptions", requestOptions)
+                return ApiInstance.fetch(requestOptions)
+                    .then(user => {
+                        console.log("user", user)
+                        const userDetails = user.data.data;
+                        dispatch(loginSuccess(userDetails))
+                        resolve(userDetails);
+                    })
+                    .catch(error => {
+                        let simplifiedError = getNetworkError(error);
+                        console.log("error", simplifiedError);
+                        dispatch(loginFailure(simplifiedError));
                         reject(simplifiedError);
                     })
             } else {
