@@ -84,7 +84,6 @@ class AuthenticationContainer extends Component {
     }
 
     render() {
-        console.log(this.props.location)
         return (
             <AuthenticationWrapper
                 signupSubmit={this.signupSubmit}

@@ -20,7 +20,6 @@ export default class AuthenticationWrapper extends Component {
     }
 
     renderForm = (formType) => {
-        console.log("formType", formType)
         switch (formType) {
             case "login": 
                 return <SigninForm signinSubmit={this.props.signinSubmit} navigateTo={this.props.navigateTo} />
