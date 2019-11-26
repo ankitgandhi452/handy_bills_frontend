@@ -10,7 +10,7 @@ import PhoneAndroidRoundedIcon from '@material-ui/icons/PhoneAndroidRounded';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
-import { Field, Form, Formik } from 'formik';
+import { FastField, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import CustomPrimaryButton from 'globals/CustomPrimaryButton';
 import CustomSecondaryButton from 'globals/CustomSecondaryButton';
@@ -53,7 +53,8 @@ export default class SignupForm extends Component {
 
     static propTypes = {
         signupSubmit: PropTypes.func.isRequired,
-        navigateTo: PropTypes.func.isRequired
+        navigateTo: PropTypes.func.isRequired,
+        navigationState: PropTypes.object.isRequired
     }
 
     // static defaultProps = {
@@ -96,7 +97,7 @@ export default class SignupForm extends Component {
                                         spacing={2}
                                     >
                                         <Grid item xs={12} md={8}>
-                                            <Field
+                                            <FastField
                                                 name="name"
                                                 type="text"
                                                 component={TextField}
@@ -111,7 +112,7 @@ export default class SignupForm extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={8}>
-                                            <Field
+                                            <FastField
                                                 name="email"
                                                 type="email"
                                                 component={TextField}
@@ -126,7 +127,7 @@ export default class SignupForm extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={8}>
-                                            <Field
+                                            <FastField
                                                 name="password"
                                                 type={this.state.showPassword ? "text" : "password"}
                                                 component={TextField}
@@ -152,7 +153,7 @@ export default class SignupForm extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={8}>
-                                            <Field
+                                            <FastField
                                                 name="passwordConfirmation"
                                                 type={this.state.showPasswordConfirmation ? "text" : "password"}
                                                 component={TextField}
@@ -178,7 +179,7 @@ export default class SignupForm extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={8}>
-                                            <Field
+                                            <FastField
                                                 name="mobileNumber"
                                                 type="number"
                                                 component={TextField}

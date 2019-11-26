@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
+import { FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_INITIATE, FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, RESET_USER, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
 import { getNetworkError, getRequestDataInFormat } from 'helpers/network';
 
 export const storeAuth = (payload) => (
@@ -67,6 +67,33 @@ const loginFailure = (payload) => (
     }
 )
 
+const forgotPasswordInitiate = (payload) => (
+    {
+        type: FORGOT_PASSWORD_INITIATE,
+        payload
+    }
+)
+
+const forgotPasswordSuccess = (payload) => (
+    {
+        type: FORGOT_PASSWORD_SUCCESS,
+        payload
+    }
+)
+
+const forgotPasswordFailure = (payload) => (
+    {
+        type: FORGOT_PASSWORD_FAILURE,
+        payload
+    }
+)
+
+export const resetUser = () => (
+    {
+        type: RESET_USER,
+    }
+)
+
 export const register = (userData) => {
     return (dispatch, getState, { ApiInstance, urls }) => {
         return new Promise((resolve, reject) => {
@@ -122,6 +149,38 @@ export const login = (userData) => {
                         let simplifiedError = getNetworkError(error);
                         console.log("error", simplifiedError);
                         dispatch(loginFailure(simplifiedError));
+                        reject(simplifiedError);
+                    })
+            } else {
+                resolve({msg: "Already Authenticated"})
+            }
+        })
+    }
+}
+
+export const forgotPassword = (userData) => {
+    return (dispatch, getState, { ApiInstance, urls }) => {
+        return new Promise((resolve, reject) => {
+            dispatch(forgotPasswordInitiate())
+            const authDetails = getState().authentication;
+            if (!authDetails.isAuthenticated) {
+                let requestOptions = {
+                    method: "POST",
+                    url: urls.api.authentication.forgotPassword,
+                    data: getRequestDataInFormat(userData)
+                }
+                console.log("requestOptions", requestOptions)
+                return ApiInstance.fetch(requestOptions)
+                    .then(user => {
+                        console.log("user", user)
+                        const userDetails = user.data.data;
+                        dispatch(forgotPasswordSuccess(userDetails))
+                        resolve(userDetails);
+                    })
+                    .catch(error => {
+                        let simplifiedError = getNetworkError(error);
+                        console.log("error", simplifiedError);
+                        dispatch(forgotPasswordFailure(simplifiedError));
                         reject(simplifiedError);
                     })
             } else {

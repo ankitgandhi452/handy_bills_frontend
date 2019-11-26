@@ -8,18 +8,19 @@ const AuthenticationContainer = React.lazy(() => import("components/Authenticati
 
 const ApplicationRouter = () => (
     (
-        <Router
-            hashType='noslash'
-        >
+        <Router>
             <Suspense fallback={<CustomLoader loading={true} withTransition={false} />}>
                 <Switch>
                     
-                    <Route path="/login">
+                    <UnauthenticatedRoute path="/login">
                         <AuthenticationContainer />
-                    </Route>
-                    <Route path="/register">
+                    </UnauthenticatedRoute>
+                    <UnauthenticatedRoute path="/register">
                         <AuthenticationContainer />
-                    </Route>
+                    </UnauthenticatedRoute>
+                    <UnauthenticatedRoute path="/forgotPassword">
+                        <AuthenticationContainer />
+                    </UnauthenticatedRoute>
                     <AuthenticatedRoute path="/">
                         <AuthenticationContainer />
                     </AuthenticatedRoute>
@@ -49,6 +50,32 @@ const AuthenticatedRoute = ({children, ...rest}) => (
                             }}
                         />
                     )}
+            
+        }
+    />
+)
+
+const UnauthenticatedRoute = ({ children, ...rest }) => (
+    <Route
+        {...rest}
+        render={
+            ({ location }) => 
+            {
+                console.log(location)
+                return isAuthenticated() ?
+                    (
+                        <Redirect
+                            to={{
+                                pathname: "/",
+                                state: { from: location }
+                            }}
+                        />
+                    )
+                    :
+                    (
+                        children
+                    )
+            }
             
         }
     />

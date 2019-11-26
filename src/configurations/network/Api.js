@@ -59,7 +59,8 @@ class Api {
                 expiry,
                 uid,
                 client,
-                'access-token': accessToken
+                'access-token': accessToken,
+                isAuthenticated: true
             }
             this.authData = authData;
             store.dispatch(

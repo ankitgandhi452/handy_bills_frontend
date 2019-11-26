@@ -1,6 +1,5 @@
 import { store } from 'configurations/redux/store';
-import camelCase from 'lodash/camelCase';
-import mapKeys from 'lodash/mapKeys';
+import { camelCase, isPlainObject, mapKeys } from 'helpers/lodash';
 
 export const stateSetter = (context) => {
     let cancelled = false;
@@ -19,7 +18,8 @@ export const stateSetter = (context) => {
 export const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
 export const formatErrorCaseForForms = (errors) => {
-    return mapKeys(errors, (v, k) => camelCase(k))
+    console.log("isPlainObject", isPlainObject(errors), errors)
+    return isPlainObject(errors) ? mapKeys(errors, (v, k) => camelCase(k)) : errors;
 }
 
 export const setFormikErrors = (errors, formikScope) => {

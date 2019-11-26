@@ -1,5 +1,4 @@
-import mapKeys from 'lodash/mapKeys';
-import snakeCase from 'lodash/snakeCase';
+import { mapKeys, snakeCase } from 'helpers/lodash';
 
 
 const getNoInternetMessage = () => (

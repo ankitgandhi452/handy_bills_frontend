@@ -1,4 +1,5 @@
 import Box from '@material-ui/core/Box';
+import ForgotPasswordForm from 'components/Authentication/components/ForgotPasswordForm';
 import SigninForm from 'components/Authentication/components/SigninForm';
 import SignupForm from 'components/Authentication/components/SignupForm';
 import CustomLoader from 'globals/CustomLoader';
@@ -10,8 +11,10 @@ export default class AuthenticationWrapper extends Component {
     static propTypes = {
         signupSubmit: PropTypes.func.isRequired,
         signinSubmit: PropTypes.func.isRequired,
+        forgotPasswordSubmit: PropTypes.func.isRequired,
         navigateTo: PropTypes.func.isRequired,
         formType: PropTypes.string.isRequired,
+        navigationState: PropTypes.object.isRequired,
         user: PropTypes.shape({
             loading: PropTypes.bool.isRequired,
             data: PropTypes.object.isRequired,
@@ -22,11 +25,29 @@ export default class AuthenticationWrapper extends Component {
     renderForm = (formType) => {
         switch (formType) {
             case "login": 
-                return <SigninForm signinSubmit={this.props.signinSubmit} navigateTo={this.props.navigateTo} />
+                return <SigninForm
+                    signinSubmit={this.props.signinSubmit}
+                    navigateTo={this.props.navigateTo}
+                    navigationState={this.props.navigationState}
+                />
             case "register": 
-                return <SignupForm signupSubmit={this.props.signupSubmit} navigateTo={this.props.navigateTo} />
+                return <SignupForm
+                    signupSubmit={this.props.signupSubmit}
+                    navigateTo={this.props.navigateTo}
+                    navigationState={this.props.navigationState}
+                />
+            case "forgotPassword": 
+                return <ForgotPasswordForm
+                    forgotPasswordSubmit={this.props.forgotPasswordSubmit}
+                    navigateTo={this.props.navigateTo}
+                    navigationState={this.props.navigationState}
+                />
             default:
-                return <SigninForm signinSubmit={this.props.signinSubmit} navigateTo={this.props.navigateTo} />
+                return <SigninForm
+                    signinSubmit={this.props.signinSubmit}
+                    navigateTo={this.props.navigateTo}
+                    navigationState={this.props.navigationState}
+                />
         }
     }
 

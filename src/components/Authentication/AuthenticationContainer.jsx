@@ -1,4 +1,4 @@
-import { login, register } from 'components/Authentication/Authentication.action';
+import { forgotPassword, login, register } from 'components/Authentication/Authentication.action';
 import AuthenticationWrapper from 'components/Authentication/AuthenticationWrapper';
 import { formatErrorCaseForForms, setFormikErrors, stateSetter } from 'helpers/global';
 import { withSnackbar } from 'notistack';
@@ -69,7 +69,26 @@ class AuthenticationContainer extends Component {
     signinSubmit = (values, actions) => {
         this.props.actions.login(values)
             .then(response => {
-                this.props.enqueueSnackbar("Success!!", {variant: "success"});
+                this.props.enqueueSnackbar("Success!!", {variant: "success", anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'left',
+                }});
+            })
+            .catch(errors => {
+                const formattedError = formatErrorCaseForForms(errors);
+                console.log("formattedError", formattedError)
+                this.props.enqueueSnackbar("Please rectify the errors!!", {variant: "error"});
+                setFormikErrors(formattedError, actions);
+            })
+    }
+
+    forgotPasswordSubmit = (values, actions) => {
+        this.props.actions.forgotPassword(values)
+            .then(response => {
+                this.props.enqueueSnackbar("Success!!", { variant: "success" });
+                setTimeout(() => {
+                    this.navigateTo('/login', {email: values.email})
+                },1000)
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -80,15 +99,21 @@ class AuthenticationContainer extends Component {
     }
 
     navigateTo = (route, params={}) => {
-        this.props.history.push(route, params)
+        this.props.history.push({
+            pathname: route,
+            state: params
+        })
     }
 
     render() {
+        console.log(this.props)
         return (
             <AuthenticationWrapper
                 signupSubmit={this.signupSubmit}
                 signinSubmit={this.signinSubmit}
+                forgotPasswordSubmit={this.forgotPasswordSubmit}
                 navigateTo={this.navigateTo}
+                navigationState={this.props.location.state || {}}
                 formType={this.state.formType}
                 user={this.props.user}
             />
@@ -114,6 +139,11 @@ const mapDispatchToProps = (dispatch) => (
             login: (userData) => {
                 return dispatch(
                     login(userData)
+                )
+            },
+            forgotPassword: (userData) => {
+                return dispatch(
+                    forgotPassword(userData)
                 )
             }
         }
