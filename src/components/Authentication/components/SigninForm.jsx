@@ -57,6 +57,11 @@ export default class SigninForm extends Component {
         this.setter.setState({[key]: !currentState})
     }
 
+    navigateToForgotPassword = (isSubmitting) => {
+        if (!isSubmitting) {
+            this.props.navigateTo('/forgotPassword')
+        }
+    }
     render() {
         return (
             <Grid
@@ -122,12 +127,11 @@ export default class SigninForm extends Component {
                                                 required
                                             />
                                         </Grid>
-                                        <Grid item xs={12} md={12}>
+                                        <Grid item xs={12} md={8}>
                                             <Link
                                                 disabled={isSubmitting}
-                                                component="button"
                                                 variant="body2"
-                                                onClick={() => this.props.navigateTo('/forgotPassword')}
+                                                onClick={() => this.navigateToForgotPassword(isSubmitting)}
                                             >
                                                 Forgot Password?
                                             </Link>
