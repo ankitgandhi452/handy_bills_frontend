@@ -69,10 +69,7 @@ class AuthenticationContainer extends Component {
     signinSubmit = (values, actions) => {
         this.props.actions.login(values)
             .then(response => {
-                this.props.enqueueSnackbar("Success!!", {variant: "success", anchorOrigin: {
-                    vertical: 'top',
-                    horizontal: 'left',
-                }});
+                this.props.enqueueSnackbar("Success!!", {variant: "success"});
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
