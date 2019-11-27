@@ -1,6 +1,6 @@
 import { forgotPassword, login, register } from 'components/Authentication/Authentication.action';
 import AuthenticationWrapper from 'components/Authentication/AuthenticationWrapper';
-import { formatErrorCaseForForms, setFormikErrors, stateSetter } from 'helpers/global';
+import { commonSuccessNavigationWithDelay, formatErrorCaseForForms, setFormikErrors, stateSetter } from 'helpers/global';
 import { withSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -56,7 +56,8 @@ class AuthenticationContainer extends Component {
     signupSubmit = (values, actions) => {
         this.props.actions.register(values)
             .then(response => {
-                this.props.enqueueSnackbar("Success!!", {variant: "success"});
+                this.props.enqueueSnackbar("Success!!", { variant: "success" });
+                commonSuccessNavigationWithDelay(this.props.history, '/', 'push')
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -69,7 +70,8 @@ class AuthenticationContainer extends Component {
     signinSubmit = (values, actions) => {
         this.props.actions.login(values)
             .then(response => {
-                this.props.enqueueSnackbar("Success!!", {variant: "success"});
+                this.props.enqueueSnackbar("Success!!", { variant: "success" });
+                commonSuccessNavigationWithDelay(this.props.history, '/', 'push')
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -83,9 +85,7 @@ class AuthenticationContainer extends Component {
         this.props.actions.forgotPassword(values)
             .then(response => {
                 this.props.enqueueSnackbar("Success!!", { variant: "success" });
-                setTimeout(() => {
-                    this.navigateTo('/login', {email: values.email})
-                },1000)
+                commonSuccessNavigationWithDelay(this.props.history, '/login', 'push', {email: values.email})
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
