@@ -25,8 +25,9 @@ export default class SigninForm extends Component {
             showPassword: false,
         }
         this.setter = stateSetter(this)
+        const emailProps = this.props.navigationState.email || '';
         this.signupInitialState = {
-            email: '',
+            email: emailProps,
             password: '',
         }
         this.signupSchema = Yup.object().shape({
