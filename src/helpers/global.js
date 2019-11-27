@@ -34,3 +34,12 @@ export const setFormikErrors = (errors, formikScope) => {
 export const isAuthenticated = () => (
     store.getState().authentication.isAuthenticated
 )
+
+export const commonSuccessNavigationWithDelay = (historyRef, route, action= "push", params = {}, timeout=1000) => {
+    setTimeout(() => {
+        historyRef[action]({
+            pathname: route,
+            state: params
+        })
+    }, timeout)
+}
