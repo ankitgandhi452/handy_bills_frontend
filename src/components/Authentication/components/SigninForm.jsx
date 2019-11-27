@@ -9,7 +9,7 @@ import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
-import { FastField, Form, Formik } from 'formik';
+import { FastField, Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import CustomPrimaryButton from 'globals/CustomPrimaryButton';
 import CustomSecondaryButton from 'globals/CustomSecondaryButton';
@@ -103,7 +103,7 @@ export default class SigninForm extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={8}>
-                                            <FastField
+                                            <Field
                                                 name="password"
                                                 type={this.state.showPassword ? "text" : "password"}
                                                 component={TextField}

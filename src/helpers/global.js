@@ -43,3 +43,7 @@ export const commonSuccessNavigationWithDelay = (historyRef, route, action= "pus
         })
     }, timeout)
 }
+
+export const isMobile = () => (
+    window.innerHeight > window.innerWidth
+)

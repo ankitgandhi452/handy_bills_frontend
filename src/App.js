@@ -1,11 +1,9 @@
-import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NoSsr from '@material-ui/core/NoSsr';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from 'configurations/materialUI/theme';
 import { persistor, store } from 'configurations/redux/store';
 import ApplicationRouter from 'configurations/routing/ApplicationRouter';
-import CustomContainer from 'globals/CustomContainer';
 import CustomLoader from 'globals/CustomLoader';
 import SnackbarContainer from 'globals/SnackbarContainer';
 import React from 'react';
@@ -21,13 +19,9 @@ function App() {
         <NoSsr defer={true}>
           <CssBaseline />
           <ThemeProvider theme={theme}>
-            <CustomContainer maxWidth="md">
-              <Box height="100vh">
-                <SnackbarContainer>
-                  <ApplicationRouter />
-                </SnackbarContainer>
-              </Box>
-            </CustomContainer>
+            <SnackbarContainer>
+              <ApplicationRouter />
+            </SnackbarContainer>
           </ThemeProvider>
         </NoSsr>
       </PersistGate>
