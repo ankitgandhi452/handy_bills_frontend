@@ -5,6 +5,7 @@ import { HashRouter as Router, Redirect, Route, Switch } from "react-router-dom"
 
 
 const AuthenticationContainer = React.lazy(() => import("components/Authentication/AuthenticationContainer"))
+const ClientContainer = React.lazy(() => import("components/Client/ClientContainer"))
 
 const ApplicationRouter = () => (
     (
@@ -22,7 +23,7 @@ const ApplicationRouter = () => (
                         <AuthenticationContainer />
                     </UnauthenticatedRoute>
                     <AuthenticatedRoute path="/">
-                        <AuthenticationContainer />
+                        <ClientContainer />
                     </AuthenticatedRoute>
                 </Switch>
             </Suspense>
