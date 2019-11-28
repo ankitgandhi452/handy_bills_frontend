@@ -1,5 +1,4 @@
 import Box from "@material-ui/core/Box";
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import CustomAppBar from "globals/CustomAppBar";
 import CustomBottomNavigation from "globals/CustomBottomNavigation";
@@ -17,7 +16,7 @@ const AuthenticatedLayout = props => {
 
   return (
     <Box height="100%" width="100%" display="flex">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <CustomAppBar
         pageTitle={props.pageTitle}
         handleDrawerToggle={handleDrawerToggle}
@@ -28,9 +27,9 @@ const AuthenticatedLayout = props => {
         mobileOpen={mobileOpen}
       />
         <CustomContainer >
-            <Box p={2} pb={8} flexGrow={1} boxShadow={2} overflow="auto">
-                <Toolbar />
-                {props.children}
+            <Box p={2} pb={8} flexGrow={1} overflow="auto">
+              <Toolbar />
+              {props.children}
             </Box>
         </CustomContainer>
          <CustomBottomNavigation /> 

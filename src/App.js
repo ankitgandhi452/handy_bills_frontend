@@ -17,8 +17,8 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={<CustomLoader loading={true} />} persistor={persistor}>
         <NoSsr defer={true}>
-          <CssBaseline />
           <ThemeProvider theme={theme}>
+            <CssBaseline />
             <SnackbarContainer>
               <ApplicationRouter />
             </SnackbarContainer>
