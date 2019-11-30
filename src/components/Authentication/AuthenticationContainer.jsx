@@ -1,5 +1,6 @@
 import { forgotPassword, login, register } from 'components/Authentication/Authentication.action';
 import AuthenticationWrapper from 'components/Authentication/AuthenticationWrapper';
+import { appRoutes, defaultAuthenticatedRoute } from 'configurations/routing/AppNavigation';
 import { commonSuccessNavigationWithDelay, formatErrorCaseForForms, setFormikErrors, stateSetter } from 'helpers/global';
 import { withSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
@@ -61,7 +62,7 @@ class AuthenticationContainer extends Component {
         this.props.actions.register(values)
             .then(response => {
                 this.props.enqueueSnackbar("Success!!", { variant: "success" });
-                commonSuccessNavigationWithDelay(this.props.history, '/', 'push')
+                commonSuccessNavigationWithDelay(this.props.history, defaultAuthenticatedRoute, 'push')
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -75,7 +76,7 @@ class AuthenticationContainer extends Component {
         this.props.actions.login(values)
             .then(response => {
                 this.props.enqueueSnackbar("Success!!", { variant: "success" });
-                commonSuccessNavigationWithDelay(this.props.history, '/', 'push')
+                commonSuccessNavigationWithDelay(this.props.history, defaultAuthenticatedRoute, 'push')
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -89,7 +90,7 @@ class AuthenticationContainer extends Component {
         this.props.actions.forgotPassword(values)
             .then(response => {
                 this.props.enqueueSnackbar("Success!!", { variant: "success" });
-                commonSuccessNavigationWithDelay(this.props.history, '/login', 'push', {email: values.email})
+                commonSuccessNavigationWithDelay(this.props.history, appRoutes.authentication.login, 'push', {email: values.email})
             })
             .catch(errors => {
                 const formattedError = formatErrorCaseForForms(errors);
@@ -107,7 +108,6 @@ class AuthenticationContainer extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <AuthenticationWrapper
                 signupSubmit={this.signupSubmit}

@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Hidden from "@material-ui/core/Hidden";
 import AddIcon from '@material-ui/icons/Add';
 import ClientList from 'components/Client/components/ClientList';
+import { appRoutes } from 'configurations/routing/AppNavigation';
 import FuzzySearch from 'fuzzy-search';
 import CustomNewFab from 'globals/CustomNewFab';
 import CustomPrimaryButton from 'globals/CustomPrimaryButton';
@@ -63,7 +64,7 @@ class ClientIndex extends Component {
     
 
     navigateToNew = (event) => {
-        this.props.navigateTo('/clients/new')
+        this.props.navigateTo(appRoutes.clients.new)
     }
 
     handleSearch = (value) => {

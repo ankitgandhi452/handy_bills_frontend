@@ -4,7 +4,8 @@ const url = {
         authentication: {
             register: 'v1/auth',
             login: 'v1/auth/sign_in',
-            forgotPassword: 'v1/auth/password'
+            forgotPassword: 'v1/auth/password',
+            logout: 'v1/auth/sign_out'
         }
     }
 }

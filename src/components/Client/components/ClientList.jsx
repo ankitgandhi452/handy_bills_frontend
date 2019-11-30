@@ -39,8 +39,8 @@ const ClientList = props => {
     const getAvatar = (clientObj) => (
         <Avatar >{first(clientObj.name)}</Avatar>
     )
-    const getItems = (clientObj) => (
-        <React.Fragment>
+    const getItems = (clientObj, index) => (
+        <React.Fragment key={index}>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                     {getAvatar(clientObj)}
@@ -68,23 +68,24 @@ const ClientList = props => {
         </React.Fragment>
     )
 
-    const getSubList = (alphabet, alphabeticalList) => (
-        <li className={classes.listSection}>
+    const getSubList = (alphabet, alphabeticalList, index) => (
+        <li className={classes.listSection} key={index}>
             <ul className={classes.ul}>
                 <ListSubheader className={classes.listSubHeader}>{alphabet}</ListSubheader>
                 {map(alphabeticalList, (object, index) => (
-                        getItems(object)
+                        getItems(object, index)
                     )
                 )}
             </ul>
         </li>
     )
-    const getList = (alphabeticalSortedList) => (
-        map(alphabeticalSortedList, (value, key) => (
-                getSubList(key, value)
-            )
-        )
-    )
+    const getList = (alphabeticalSortedList) => {
+        let index = 0
+        return map(alphabeticalSortedList, (value, key) => {
+            index++
+            return getSubList(key, value, index)
+        })
+    }
     console.log(props.sortedList, "props.sortedList", getSubList("A", props.sortedList.A))
     return (
         <List className={classes.root} subheader={<li />}>

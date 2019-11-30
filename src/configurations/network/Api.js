@@ -21,6 +21,7 @@ class Api {
 
     static requestInterceptor = (config) => {
         let tokenData = this.getAuthData();
+        console.log("tokenData", tokenData, this.authData);
         return {
             ...config,
             headers: {
@@ -46,7 +47,7 @@ class Api {
     static getAuthData = () => {
         let authData = this.authData;
         if (!authData) {
-            authData = store.getState().authenticate;
+            authData = store.getState().authentication;
         }
         return authData;
     }
@@ -86,4 +87,3 @@ class Api {
 }
 
 export default Api;
-window.NetworkRequest = Api;

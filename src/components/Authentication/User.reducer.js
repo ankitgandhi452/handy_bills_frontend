@@ -1,4 +1,4 @@
-import { FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_INITIATE, FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, RESET_USER } from 'components/Authentication/Authentication.actionConstant';
+import { FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_INITIATE, FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, RESET_USER } from 'components/Authentication/Authentication.actionConstant';
 
 const DEFAULT_STATE = {
     loading: false,
@@ -21,6 +21,9 @@ const User = (state = DEFAULT_STATE, action) => {
             return {...DEFAULT_STATE, errors: {...action.payload}}
         case FORGOT_PASSWORD_SUCCESS:
         case RESET_USER:
+            return { ...DEFAULT_STATE }
+        case LOGOUT_SUCCESS:
+        case LOGOUT_FAILURE:
             return {...DEFAULT_STATE}
         default:
             return state;

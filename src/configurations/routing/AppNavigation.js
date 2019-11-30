@@ -9,5 +9,17 @@ export const bottomNavigation = [
     },
 ]
 
+export const appRoutes = {
+    authentication: {
+        login: '/login',
+        register: '/register',
+        forgotPassword: '/forgotPassword'
+    },
+    clients: {
+        new: '/clients/new',
+        index: '/clients/index'
+    }
+}
+
 export const defaultAuthenticatedRoute = "/clients/index";
 export const defaultUnauthenticatedRoute = "/login";

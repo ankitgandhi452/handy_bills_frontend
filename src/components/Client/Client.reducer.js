@@ -1,3 +1,5 @@
+import { LOGOUT_FAILURE, LOGOUT_SUCCESS } from "components/Authentication/Authentication.actionConstant";
+
 const DEFAULT_STATE = {
     loading: false,
     data: [
@@ -91,6 +93,9 @@ const DEFAULT_STATE = {
 
 const Client = (state = DEFAULT_STATE, action) => {
     switch (action.type) {
+        case LOGOUT_SUCCESS:
+        case LOGOUT_FAILURE:
+            return {...DEFAULT_STATE}
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import { STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
+import { LOGOUT_FAILURE, LOGOUT_INITIATE, LOGOUT_SUCCESS, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
 
 const DEFAULT_STATE = {
     'access-token': null,
@@ -16,6 +16,11 @@ const Authentication = (state = DEFAULT_STATE, action) => {
                 ...state,
                 ...action.payload
             }
+        case LOGOUT_INITIATE:
+            return {...state, isAuthenticated: false}
+        case LOGOUT_SUCCESS:
+        case LOGOUT_FAILURE:
+            return {...DEFAULT_STATE}
         default:
             return state;
     }

@@ -1,4 +1,6 @@
+import { logout } from 'components/Authentication/Authentication.action';
 import { store } from 'configurations/redux/store';
+import { appRoutes } from 'configurations/routing/AppNavigation';
 import { camelCase, isPlainObject, mapKeys } from 'helpers/lodash';
 
 export const stateSetter = (context) => {
@@ -47,3 +49,8 @@ export const commonSuccessNavigationWithDelay = (historyRef, route, action= "pus
 export const isMobile = () => (
     window.innerHeight > window.innerWidth
 )
+
+export const logoutUser = () => {
+    logout();
+    window.location.href = `#${appRoutes.authentication.login}`
+}

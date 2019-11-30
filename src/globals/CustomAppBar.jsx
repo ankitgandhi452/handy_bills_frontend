@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { drawerWidth } from 'configurations/materialUI/uiConstants';
 import CustomElevationScroll from 'globals/CustomElevationScroll';
 import NavigateBackButton from 'globals/NavigateBackButton';
+import SignOutButton from 'globals/SignOutButton';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -37,6 +38,7 @@ const CustomAppBar = props => {
                         <Typography variant="h6" className={classes.title} noWrap>
                             {props.pageTitle}
                         </Typography>
+                        <SignOutButton />
                     </Toolbar>
                 </AppBar>
             </CustomElevationScroll>

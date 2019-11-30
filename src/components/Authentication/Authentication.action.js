@@ -1,4 +1,5 @@
-import { FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_INITIATE, FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, RESET_USER, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
+import { FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_INITIATE, FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_INITIATE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_INITIATE, LOGOUT_SUCCESS, REGISTER_FAILURE, REGISTER_INITIATE, REGISTER_SUCCESS, RESET_USER, STORE_AUTH } from 'components/Authentication/Authentication.actionConstant';
+import { url } from 'configurations/network/url';
 import { getNetworkError, getRequestDataInFormat } from 'helpers/network';
 
 export const storeAuth = (payload) => (
@@ -7,23 +8,6 @@ export const storeAuth = (payload) => (
         payload
     }
 )
-
-// export const register = (userData) => (
-//     {
-//         type: REGISTER_INITIATE,
-//         payLoad: userData,
-//         meta: {
-//             offline: {
-//               // the network action to execute:
-//               effect: { url: '/api/follow', method: 'POST', data: userData },
-//               // action to dispatch when effect succeeds:
-//               commit: { type: 'STORE_AUTH', meta: { userData } },
-//               // action to dispatch if network action fails permanently:
-//               rollback: { type: 'REGISTER_ROLLBACK', meta: { userData } }
-//             }
-//         }
-//     }
-// )
 
 const registerInitiate = (payload) => (
     {
@@ -189,3 +173,24 @@ export const forgotPassword = (userData) => {
         })
     }
 }
+
+export const logout = () => ({
+    type: LOGOUT_INITIATE,
+    payLoad: { },
+    meta: {
+        offline: {
+            // the network action to execute:
+            effect: { url:  url.api.authentication.logout, method: 'DELETE' },
+            // action to dispatch when effect succeeds:
+            commit: { type: LOGOUT_SUCCESS, meta: {} },
+            // action to dispatch if network action fails permanently:
+            rollback: { type: LOGOUT_FAILURE, meta: {} }
+        }
+    }
+})
+//     return (dispatch, getState, { ApiInstance, urls }) => {
+//        return {
+            
+//         }
+//     }
+// }
