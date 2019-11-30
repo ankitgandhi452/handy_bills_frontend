@@ -1,3 +1,4 @@
+import { defaultAuthenticatedRoute, defaultUnauthenticatedRoute } from "configurations/routing/AppNavigation";
 import CustomLoader from "globals/CustomLoader";
 import { isAuthenticated } from "helpers/global";
 import React, { Suspense } from "react";
@@ -22,8 +23,18 @@ const ApplicationRouter = () => (
                     <UnauthenticatedRoute path="/forgotPassword">
                         <AuthenticationContainer />
                     </UnauthenticatedRoute>
-                    <AuthenticatedRoute path="/">
+                    <AuthenticatedRoute path="/clients/index">
                         <ClientContainer />
+                    </AuthenticatedRoute>
+                    <AuthenticatedRoute path="/clients/new">
+                        <ClientContainer />
+                    </AuthenticatedRoute>
+                    <AuthenticatedRoute path="/">
+                        <Redirect
+                            to={{
+                                pathname: defaultAuthenticatedRoute,
+                            }}
+                        />
                     </AuthenticatedRoute>
                 </Switch>
             </Suspense>
@@ -46,7 +57,7 @@ const AuthenticatedRoute = ({children, ...rest}) => (
                     (
                         <Redirect
                             to={{
-                                pathname: "/login",
+                                pathname: defaultUnauthenticatedRoute,
                                 state: { from: location }
                             }}
                         />
@@ -67,7 +78,7 @@ const UnauthenticatedRoute = ({ children, ...rest }) => (
                     (
                         <Redirect
                             to={{
-                                pathname: "/",
+                                pathname: defaultAuthenticatedRoute,
                                 state: { from: location }
                             }}
                         />

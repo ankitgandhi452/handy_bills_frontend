@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const CustomElevationScroll = props => {
-    const { children, window } = props;
+  const { children, window, containerRef } = props;
+  console.log(containerRef)
     
     // Note that you normally won't need to set the window ref as useScrollTrigger
     // will default to window.
@@ -11,7 +12,7 @@ const CustomElevationScroll = props => {
     const trigger = useScrollTrigger({
       disableHysteresis: true,
       threshold: 0,
-      target: window ? window() : undefined,
+      target: containerRef ? containerRef : window ? window() : undefined,
     });
   
     return React.cloneElement(children, {
@@ -21,12 +22,16 @@ const CustomElevationScroll = props => {
 
 
 CustomElevationScroll.propTypes = {
-    children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
+  containerRef: PropTypes.oneOfType([
+    PropTypes.func, 
+    PropTypes.shape({ current: PropTypes.any })
+  ]),
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
      */
-    window: PropTypes.func,
+  window: PropTypes.func,
 };
 
 

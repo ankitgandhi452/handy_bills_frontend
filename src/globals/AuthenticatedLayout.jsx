@@ -1,5 +1,4 @@
 import Box from "@material-ui/core/Box";
-import Toolbar from '@material-ui/core/Toolbar';
 import CustomAppBar from "globals/CustomAppBar";
 import CustomBottomNavigation from "globals/CustomBottomNavigation";
 import CustomContainer from "globals/CustomContainer";
@@ -9,26 +8,29 @@ import React from "react";
 
 const AuthenticatedLayout = props => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [overflowComponentRef, setOverflowComponentRef] = React.useState(undefined);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   return (
-    <Box height="100%" width="100%" display="flex">
+    <Box height="100%" width="100%" display="flex" overflow="auto">
       {/* <CssBaseline /> */}
       <CustomAppBar
         pageTitle={props.pageTitle}
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
+        containerRef={overflowComponentRef}
+        showBack={props.showBack}
       />
       <CustomDrawer
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
       />
         <CustomContainer >
-            <Box p={2} pb={8} flexGrow={1} overflow="auto">
-              <Toolbar />
+            <Box ref={ref => setOverflowComponentRef(ref)} p={1} pt={8} pb={8} height="100%" width="100%" overflow="auto" >
+              {/* <Toolbar /> */}
               {props.children}
             </Box>
         </CustomContainer>
@@ -38,11 +40,13 @@ const AuthenticatedLayout = props => {
 }
 
 AuthenticatedLayout.propTypes = {
-  pageTitle: PropTypes.string
+  pageTitle: PropTypes.string,
+  showBack: PropTypes.bool
 };
 
 AuthenticatedLayout.defaultProps = {
-  pageTitle: ""
+  pageTitle: "",
+  showBack: false
 };
 
 export default AuthenticatedLayout;

@@ -8,3 +8,6 @@ export const bottomNavigation = [
         icon: <ContactsRoundedIcon />
     },
 ]
+
+export const defaultAuthenticatedRoute = "/clients/index";
+export const defaultUnauthenticatedRoute = "/login";

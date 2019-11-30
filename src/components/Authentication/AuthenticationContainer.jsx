@@ -48,6 +48,10 @@ class AuthenticationContainer extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setter.cancel()
+    }
+
     getFormType = () => (
         this.props.location.pathname.split("/")[1]
     )
